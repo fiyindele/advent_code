@@ -26,6 +26,9 @@ let values = [];
 let elfInput = prompt("Enter calibration entry: ");
 
 // string array to save each line
+// let stringCalib = elfInput.split("\n");
+
+// string array to save the line
 let stringCalib = elfInput.split(" ");
 
 console.log("lines of text: " + stringCalib);
