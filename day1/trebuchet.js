@@ -15,54 +15,63 @@ treb7uchet
 1abc2 pqr3stu8vwx a1b2c3d4e5f treb7uchet
 */
 
-const prompt = require("prompt-sync")({ sigint: true });
+// const prompt = require("prompt-sync")({ sigint: true });
 
-// this array saves all digits on a line entry temporarily
-let digits = [];
+function sumOfCalibrationValues(elfInput) {
+  // string array to save an array of lines
+  var stringCalib = elfInput.split("\n");
 
-let values = [];
+  var sum = 0;
 
-// prompting the user for calibration entries
-let elfInput = prompt("Enter calibration entry: ");
+  // this array saves all digits on a line entry temporarily
+  var digits = [];
+  var values = [];
 
-// string array to save each line
-// let stringCalib = elfInput.split("\n");
+  // search through each character on the line for digits
+  for (let i = 0; i < stringCalib.length; i++) {
+    var line = stringCalib[i];
 
-// string array to save the line
-let stringCalib = elfInput.split(" ");
-
-console.log("lines of text: " + stringCalib);
-
-// search through each character on the line for digits
-for (let i = 0; i < stringCalib.length; i++) {
-  let inputStrChar = stringCalib[i].split("");
-
-  console.log(
-    "For one line of text, each element in this line (" +
-      stringCalib[i] +
-      "): " +
-      inputStrChar
-  );
-
-  for (let j = 0; j < inputStrChar.length; j++) {
-    var elementInt = parseInt(inputStrChar[j]);
-    if (elementInt >= 0 && elementInt <= 9) {
-      digits.push(elementInt);
-    } else {
+    if (line.length == 0) {
       continue;
+    }
+
+    var inputStrChar = line.split("");
+
+    console.log(
+      "For one line of text, each element in this line (" +
+        stringCalib[i] +
+        "): " +
+        inputStrChar
+    );
+
+    // for each character in the line, check if it's a number
+    for (let j of line) {
+      if (!isNaN(j)) {
+        var elementInt = parseInt(j);
+        digits.push(elementInt);
+      }
     }
     console.log("Numbers in the line, digits array contains: " + digits);
     values[i] = digits[0].toString() + digits[digits.length - 1].toString();
+    digits = [];
   }
-  digits = [];
+
+  console.log("- An array of the values calibrated: " + values);
+
+  // sum up the values
+  for (let k = 0; k < values.length; k++) {
+    sum = sum + parseInt(values[k]);
+  }
+
+  console.log("The sum of all values is ---> " + sum);
 }
 
-console.log("- An array of the values calibrated: " + values);
+// prompting the user for calibration entries
+//var elfInput = prompt("Enter calibration entry: ");
 
-// sum up the values
-var sum = 0;
-for (let k = 0; k < values.length; k++) {
-  sum = sum + parseInt(values[k]);
-}
+var elfInputEx = `1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet`;
 
-console.log("THE SUM OF ALL VALUES IS ---> " + sum);
+console.log(sumOfCalibrationValues(elfInputEx));
