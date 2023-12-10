@@ -35,8 +35,6 @@ function sumOfCalibrationValues(elfInput) {
       continue;
     }
 
-    var inputStrChar = line.split("");
-
     console.log(
       "For one line of text, each element in this line (" +
         stringCalib[i] +
@@ -44,11 +42,17 @@ function sumOfCalibrationValues(elfInput) {
         inputStrChar
     );
 
-    // for each character in the line, check if it's a number
-    for (let j of line) {
-      if (!isNaN(j)) {
+    // for each character in the line, check if it's a number or not
+    for (let j = 0; j < line.length; j++) {
+      if (!isNaN(line[j])) {
         var elementInt = parseInt(j);
         digits.push(elementInt);
+        continue;
+      }
+
+      // each number word is minimum 3 words and max 5 words
+      for (let m = j + 2; index < array.length; index++) {
+        const element = array[index];
       }
     }
     console.log("Numbers in the line, digits array contains: " + digits);
@@ -66,6 +70,48 @@ function sumOfCalibrationValues(elfInput) {
   console.log("The sum of all values is ---> " + sum);
 }
 
+function lettersToNumber(letters) {
+  switch (letters) {
+    case "one":
+      return 1;
+      break;
+
+    case "two":
+      return 2;
+      break;
+
+    case "three":
+      return 3;
+      break;
+
+    case "four":
+      return 4;
+      break;
+
+    case "five":
+      return 5;
+      break;
+
+    case "six":
+      return 6;
+      break;
+
+    case "seven":
+      return 7;
+      break;
+
+    case "eight":
+      return 8;
+      break;
+
+    case "nine":
+      return 9;
+      break;
+
+    default:
+      return 0;
+  }
+}
 // prompting the user for calibration entries
 //var elfInput = prompt("Enter calibration entry: ");
 
